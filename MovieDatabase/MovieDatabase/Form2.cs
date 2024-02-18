@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace MovieDatabase
 {
@@ -16,6 +17,22 @@ namespace MovieDatabase
         {
             InitializeComponent();
         }
+
+        private void utlizatoriBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.utlizatoriBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.mainDataSet);
+
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'mainDataSet.Utlizatori' table. You can move, or remove it, as needed.
+            this.utlizatoriTableAdapter.Fill(this.mainDataSet.Utlizatori);
+
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -42,27 +59,17 @@ namespace MovieDatabase
                 MessageBox.Show("Utilizatorul exista deja\nIntrodu alt nume de utilizator");
                 return;
             }
+            this.utlizatoriTableAdapter.InsertUtilizator(textBox1.Text, textBox2.Text);
             this.tableAdapterManager.UpdateAll(this.mainDataSet);
             this.utlizatoriTableAdapter.Fill(this.mainDataSet.Utlizatori);
-            textBox1.Text = string.Empty;
-            textBox2.Text = string.Empty;
             Form1 form = new Form1();
             form.Show();
             this.Hide();
         }
 
-        private void utlizatoriBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        
+        private void label3_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.utlizatoriBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.mainDataSet);
-
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'mainDataSet.Utlizatori' table. You can move, or remove it, as needed.
-            this.utlizatoriTableAdapter.Fill(this.mainDataSet.Utlizatori);
 
         }
     }

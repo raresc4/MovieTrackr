@@ -48,6 +48,9 @@ namespace MovieDatabase
                 return;
             }
             MessageBox.Show("Te-ai logat cu succes!");
+            Form3 form = new Form3();
+            form.Show();
+            this.Hide();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
