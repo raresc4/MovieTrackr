@@ -1,0 +1,13 @@
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\bin\Debug\MovieDatabase.mdf
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\bin\Debug\MovieDatabase_log.ldf
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\bin\Debug\MovieDatabase.exe.config
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\bin\Debug\MovieDatabase.exe
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\bin\Debug\MovieDatabase.pdb
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.csproj.AssemblyReference.cache
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.Form1.resources
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.Properties.Resources.resources
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.csproj.GenerateResource.cache
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.csproj.CoreCompileInputs.cache
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.exe
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.pdb
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.Form2.resources
