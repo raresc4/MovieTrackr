@@ -16,9 +16,25 @@ namespace MovieDatabase
         {
             InitializeComponent();
         }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'mainDataSet.Utlizatori' table. You can move, or remove it, as needed.
+            this.utlizatoriTableAdapter.Fill(this.mainDataSet.Utlizatori);
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void utlizatoriBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.utlizatoriBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.mainDataSet);
+
         }
     }
 }
