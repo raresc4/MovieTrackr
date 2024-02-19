@@ -79,10 +79,21 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainDataSet.cs">
+      <DependentUpon>MainDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MainDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDatabaseDataSet.cs">
+      <DependentUpon>MovieDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDatabaseDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieDatabaseDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +125,17 @@
     </None>
     <None Include="MainDataSet.xss">
       <DependentUpon>MainDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MovieDatabaseDataSet.xsc">
+      <DependentUpon>MovieDatabaseDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MovieDatabaseDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MovieDatabaseDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MovieDatabaseDataSet.xss">
+      <DependentUpon>MovieDatabaseDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
