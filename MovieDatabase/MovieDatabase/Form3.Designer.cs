@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.filmeDataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,24 +39,25 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.filmeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.movieDatabaseDataSet = new MovieDatabase.MovieDatabaseDataSet();
+            this.filmeTableAdapter = new MovieDatabase.MovieDatabaseDataSetTableAdapters.FilmeTableAdapter();
+            this.tableAdapterManager1 = new MovieDatabase.MovieDatabaseDataSetTableAdapters.TableAdapterManager();
             this.mainDataSet = new MovieDatabase.MainDataSet();
             this.utlizatoriBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.utlizatoriTableAdapter = new MovieDatabase.MainDataSetTableAdapters.UtlizatoriTableAdapter();
             this.tableAdapterManager = new MovieDatabase.MainDataSetTableAdapters.TableAdapterManager();
+            this.filmeDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filmeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.movieDatabaseDataSet = new MovieDatabase.MovieDatabaseDataSet();
-            this.filmeTableAdapter = new MovieDatabase.MovieDatabaseDataSetTableAdapters.FilmeTableAdapter();
-            this.tableAdapterManager1 = new MovieDatabase.MovieDatabaseDataSetTableAdapters.TableAdapterManager();
-            ((System.ComponentModel.ISupportInitialize)(this.filmeDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mainDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.utlizatoriBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filmeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieDatabaseDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.utlizatoriBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filmeDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -79,25 +79,6 @@
             this.button2.Text = "Adauga film";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // filmeDataGridView
-            // 
-            this.filmeDataGridView.AutoGenerateColumns = false;
-            this.filmeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.filmeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            this.filmeDataGridView.DataSource = this.filmeBindingSource;
-            this.filmeDataGridView.Location = new System.Drawing.Point(276, 42);
-            this.filmeDataGridView.Name = "filmeDataGridView";
-            this.filmeDataGridView.RowHeadersWidth = 51;
-            this.filmeDataGridView.RowTemplate.Height = 24;
-            this.filmeDataGridView.Size = new System.Drawing.Size(656, 373);
-            this.filmeDataGridView.TabIndex = 2;
-            this.filmeDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.filmeDataGridView_CellContentClick);
             // 
             // label1
             // 
@@ -167,67 +148,6 @@
             this.textBox4.TabIndex = 10;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
-            // mainDataSet
-            // 
-            this.mainDataSet.DataSetName = "MainDataSet";
-            this.mainDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // utlizatoriBindingSource
-            // 
-            this.utlizatoriBindingSource.DataMember = "Utlizatori";
-            this.utlizatoriBindingSource.DataSource = this.mainDataSet;
-            // 
-            // utlizatoriTableAdapter
-            // 
-            this.utlizatoriTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.UpdateOrder = MovieDatabase.MainDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            this.tableAdapterManager.UtlizatoriTableAdapter = this.utlizatoriTableAdapter;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Film id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Film id";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Nume";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Nume";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Anul aparitiei";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Anul aparitiei";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Genul";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Genul";
-            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Actor principal";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Actor principal";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 125;
-            // 
             // filmeBindingSource
             // 
             this.filmeBindingSource.DataMember = "Filme";
@@ -249,11 +169,91 @@
             this.tableAdapterManager1.UpdateOrder = MovieDatabase.MovieDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             this.tableAdapterManager1.UtlizatoriTableAdapter = null;
             // 
+            // mainDataSet
+            // 
+            this.mainDataSet.DataSetName = "MainDataSet";
+            this.mainDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // utlizatoriBindingSource
+            // 
+            this.utlizatoriBindingSource.DataMember = "Utlizatori";
+            this.utlizatoriBindingSource.DataSource = this.mainDataSet;
+            // 
+            // utlizatoriTableAdapter
+            // 
+            this.utlizatoriTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.UpdateOrder = MovieDatabase.MainDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
+            this.tableAdapterManager.UtlizatoriTableAdapter = this.utlizatoriTableAdapter;
+            // 
+            // filmeDataGridView
+            // 
+            this.filmeDataGridView.AutoGenerateColumns = false;
+            this.filmeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.filmeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            this.filmeDataGridView.DataSource = this.filmeBindingSource;
+            this.filmeDataGridView.Location = new System.Drawing.Point(310, 77);
+            this.filmeDataGridView.Name = "filmeDataGridView";
+            this.filmeDataGridView.RowHeadersWidth = 51;
+            this.filmeDataGridView.RowTemplate.Height = 24;
+            this.filmeDataGridView.Size = new System.Drawing.Size(647, 220);
+            this.filmeDataGridView.TabIndex = 10;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Filmid";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Filmid";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Nume";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Nume";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Anul";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Anul";
+            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Genul";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Genul";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Actor";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Actor";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 125;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(969, 559);
+            this.ClientSize = new System.Drawing.Size(969, 567);
+            this.Controls.Add(this.filmeDataGridView);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
@@ -262,18 +262,17 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.filmeDataGridView);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.MaximizeBox = false;
             this.Name = "Form3";
             this.Text = "MovieTrackr";
             this.Load += new System.EventHandler(this.Form3_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.filmeDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.mainDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.utlizatoriBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.filmeBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieDatabaseDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.utlizatoriBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filmeDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -291,12 +290,6 @@
         private System.Windows.Forms.BindingSource filmeBindingSource;
         private MovieDatabaseDataSetTableAdapters.FilmeTableAdapter filmeTableAdapter;
         private MovieDatabaseDataSetTableAdapters.TableAdapterManager tableAdapterManager1;
-        private System.Windows.Forms.DataGridView filmeDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -305,5 +298,14 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn filmIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn anulAparitieiDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn actorPrincipalDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView filmeDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
     }
 }

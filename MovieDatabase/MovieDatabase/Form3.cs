@@ -44,10 +44,21 @@ namespace MovieDatabase
             var result = this.filmeTableAdapter.GetDataBy(textBox1.Text);
             if(result.Rows.Count != 0)
             {
-                MessageBox.Show("Filmul nu exista deja");
+                textBox1.Text = string.Empty;
+                textBox2.Text = string.Empty;
+                textBox3.Text = string.Empty;
+                textBox4.Text = string.Empty;
+                MessageBox.Show("Filmul exista deja");
                 return;
             }
-
+            this.filmeTableAdapter.InsertFilm(textBox1.Text,Convert.ToInt32(textBox2.Text),textBox3.Text,textBox4.Text);
+            this.tableAdapterManager1.UpdateAll(this.movieDatabaseDataSet);
+            this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
+            MessageBox.Show(textBox1.Text + " a fost adaugat cu succes!");
+            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            textBox3.Text = string.Empty;
+            textBox4.Text = string.Empty;
         }
 
         private void filmeDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
