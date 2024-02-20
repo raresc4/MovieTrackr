@@ -48,13 +48,13 @@ namespace MovieDatabase
                 textBox2.Text = string.Empty;
                 textBox3.Text = string.Empty;
                 textBox4.Text = string.Empty;
-                MessageBox.Show("Filmul exista deja");
+                MessageBox.Show("Movie already exists");
                 return;
             }
             this.filmeTableAdapter.InsertFilm(textBox1.Text,Convert.ToInt32(textBox2.Text),textBox3.Text,textBox4.Text);
             this.tableAdapterManager1.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
-            MessageBox.Show(textBox1.Text + " a fost adaugat cu succes!");
+            MessageBox.Show(textBox1.Text + " was succesfully added");
             textBox1.Text = string.Empty;
             textBox2.Text = string.Empty;
             textBox3.Text = string.Empty;
@@ -84,6 +84,13 @@ namespace MovieDatabase
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form4 form = new Form4();
+            form.Show();
+            this.Hide();
         }
     }
 }

@@ -44,10 +44,10 @@ namespace MovieDatabase
             {
                 textBox1.Text = string.Empty;
                 textBox2.Text = string.Empty;
-                MessageBox.Show("Utilizatorul nu exista!");
+                MessageBox.Show("User not found");
                 return;
             }
-            MessageBox.Show("Te-ai logat cu succes!");
+            MessageBox.Show("Login successfull");
             Form3 form = new Form3();
             form.Show();
             this.Hide();

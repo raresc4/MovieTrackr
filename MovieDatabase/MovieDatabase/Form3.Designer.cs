@@ -53,6 +53,7 @@
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.filmeBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.movieDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataSet)).BeginInit();
@@ -76,7 +77,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(119, 23);
             this.button2.TabIndex = 1;
-            this.button2.Text = "Adauga film";
+            this.button2.Text = "Add movie";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -92,7 +93,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 139);
+            this.label2.Location = new System.Drawing.Point(12, 139);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 16);
             this.label2.TabIndex = 4;
@@ -200,7 +201,7 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
             this.filmeDataGridView.DataSource = this.filmeBindingSource;
-            this.filmeDataGridView.Location = new System.Drawing.Point(310, 77);
+            this.filmeDataGridView.Location = new System.Drawing.Point(301, 77);
             this.filmeDataGridView.Name = "filmeDataGridView";
             this.filmeDataGridView.RowHeadersWidth = 51;
             this.filmeDataGridView.RowTemplate.Height = 24;
@@ -248,11 +249,22 @@
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.Width = 125;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(390, 524);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(117, 23);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "Delete movie";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 567);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.filmeDataGridView);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
@@ -307,5 +319,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.Button button3;
     }
 }

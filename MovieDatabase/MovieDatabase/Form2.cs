@@ -56,7 +56,7 @@ namespace MovieDatabase
             {
                 textBox1.Text = string.Empty;
                 textBox2.Text = string.Empty;
-                MessageBox.Show("Utilizatorul exista deja\nIntrodu alt nume de utilizator");
+                MessageBox.Show("User already in use");
                 return;
             }
             this.utlizatoriTableAdapter.InsertUtilizator(textBox1.Text, textBox2.Text);
