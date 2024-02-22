@@ -26,12 +26,7 @@ namespace MovieDatabase
 
         private void button2_Click(object sender, EventArgs e)
         {
-            try {
-                this.filmeTableAdapter.GetDataBy(textBox1.Text);
-            }
-            catch {
-                Console.WriteLine("Error ");
-            }
+            //this.filmeTableAdapter.GetDataBy(textBox1.Text);
             this.filmeTableAdapter.DeleteFilm(textBox1.Text);
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);

@@ -42,7 +42,7 @@ namespace MovieDatabase
         private void button2_Click(object sender, EventArgs e)
         {
             var result = this.filmeTableAdapter.GetDataBy(textBox1.Text);
-            if(result.Rows.Count != 0)
+            if (result.Rows.Count != 0)
             {
                 textBox1.Text = string.Empty;
                 textBox2.Text = string.Empty;
@@ -51,14 +51,15 @@ namespace MovieDatabase
                 MessageBox.Show("Movie already exists");
                 return;
             }
-            this.filmeTableAdapter.InsertFilm(textBox1.Text,Convert.ToInt32(textBox2.Text),textBox3.Text,textBox4.Text);
-            this.tableAdapterManager1.UpdateAll(this.movieDatabaseDataSet);
-            this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
-            MessageBox.Show(textBox1.Text + " was succesfully added");
-            textBox1.Text = string.Empty;
-            textBox2.Text = string.Empty;
-            textBox3.Text = string.Empty;
-            textBox4.Text = string.Empty;
+                this.filmeTableAdapter.InsertFilm(textBox1.Text, Convert.ToInt32(textBox2.Text), textBox3.Text, textBox4.Text);
+                this.tableAdapterManager1.UpdateAll(this.movieDatabaseDataSet);
+                this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
+                MessageBox.Show(textBox1.Text + " was succesfully added");
+                textBox1.Text = string.Empty;
+                textBox2.Text = string.Empty;
+                textBox3.Text = string.Empty;
+                textBox4.Text = string.Empty;
+            
         }
 
         private void filmeDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -89,6 +90,13 @@ namespace MovieDatabase
         private void button3_Click(object sender, EventArgs e)
         {
             Form4 form = new Form4();
+            form.Show();
+            this.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
             form.Show();
             this.Hide();
         }
