@@ -1408,7 +1408,8 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nume", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT Nume FROM dbo.Filme WHERE Nume=@Nume";
+            this._commandCollection[2].CommandText = "SELECT Filmid, Nume, Anul, Genul, Actor, Nota\r\nFROM     dbo.Filme\r\nWHERE  Nume = " +
+                "@Nume";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nume", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();

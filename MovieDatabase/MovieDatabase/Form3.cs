@@ -74,6 +74,11 @@ namespace MovieDatabase
             this.filmeTableAdapter.InsertFilm(textBox1.Text, Convert.ToInt32(textBox2.Text), textBox3.Text, textBox4.Text, Convert.ToInt32(textBox5.Text));
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
+            textBox1.Text = string.Empty;
+            textBox2.Text = string.Empty;
+            textBox3.Text = string.Empty;
+            textBox4.Text = string.Empty;
+            textBox5.Text = string.Empty;
         }
 
         private void button3_Click(object sender, EventArgs e)

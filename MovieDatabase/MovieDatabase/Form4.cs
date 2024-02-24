@@ -29,14 +29,16 @@ namespace MovieDatabase
             var result = this.filmeTableAdapter.GetDataBy1(textBox1.Text);
             if(result.Rows.Count == 0 )
             {
+                textBox1.Text = string.Empty;
                 MessageBox.Show("The movie you're trying to delete does not exist!");
                 return;
             }
             this.filmeTableAdapter.DeleteFilm(textBox1.Text);
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
-            Form3 form = new Form3();
-            form.Show();
+            textBox1.Text = string.Empty;
+            Form5 form2 = new Form5();
+            form2.Show();
             this.Hide();
         }
 
