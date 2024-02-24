@@ -40,18 +40,14 @@
             this.utlizatoriBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.utlizatoriTableAdapter = new MovieDatabase.MainDataSetTableAdapters.UtlizatoriTableAdapter();
             this.tableAdapterManager = new MovieDatabase.MainDataSetTableAdapters.TableAdapterManager();
-            this.utlizatoriDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.utlizatoriBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.utlizatoriDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(523, 358);
+            this.button1.Location = new System.Drawing.Point(561, 368);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 0;
@@ -92,7 +88,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(385, 164);
+            this.textBox1.Location = new System.Drawing.Point(385, 165);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(174, 22);
             this.textBox1.TabIndex = 4;
@@ -109,9 +105,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(189, 363);
+            this.button2.Location = new System.Drawing.Point(167, 368);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(163, 23);
+            this.button2.Size = new System.Drawing.Size(163, 28);
             this.button2.TabIndex = 6;
             this.button2.Text = "Create new account";
             this.button2.UseVisualStyleBackColor = true;
@@ -137,53 +133,22 @@
             this.tableAdapterManager.UpdateOrder = MovieDatabase.MainDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             this.tableAdapterManager.UtlizatoriTableAdapter = this.utlizatoriTableAdapter;
             // 
-            // utlizatoriDataGridView
+            // button3
             // 
-            this.utlizatoriDataGridView.AutoGenerateColumns = false;
-            this.utlizatoriDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.utlizatoriDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
-            this.utlizatoriDataGridView.DataSource = this.utlizatoriBindingSource;
-            this.utlizatoriDataGridView.Location = new System.Drawing.Point(729, 69);
-            this.utlizatoriDataGridView.Name = "utlizatoriDataGridView";
-            this.utlizatoriDataGridView.RowHeadersWidth = 51;
-            this.utlizatoriDataGridView.RowTemplate.Height = 24;
-            this.utlizatoriDataGridView.Size = new System.Drawing.Size(300, 220);
-            this.utlizatoriDataGridView.TabIndex = 7;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Username";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Username";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Password";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Password";
-            this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.Width = 125;
+            this.button3.Location = new System.Drawing.Point(394, 368);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 28);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Return";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1116, 450);
-            this.Controls.Add(this.utlizatoriDataGridView);
+            this.ClientSize = new System.Drawing.Size(781, 450);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -197,7 +162,6 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.utlizatoriBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.utlizatoriDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,9 +180,6 @@
         private System.Windows.Forms.BindingSource utlizatoriBindingSource;
         private MainDataSetTableAdapters.UtlizatoriTableAdapter utlizatoriTableAdapter;
         private MainDataSetTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.DataGridView utlizatoriDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.Button button3;
     }
 }

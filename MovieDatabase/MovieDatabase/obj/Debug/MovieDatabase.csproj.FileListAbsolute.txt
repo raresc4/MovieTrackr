@@ -13,3 +13,4 @@ C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\Mo
 C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.Form2.resources
 C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.Form3.resources
 C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.Form4.resources
+C:\Users\Antonio\Desktop\cod\proiecteC#\MovieDatabase\MovieDatabase\obj\Debug\MovieDatabase.Form5.resources

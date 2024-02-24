@@ -59,6 +59,12 @@ namespace MovieDatabase
                 MessageBox.Show("User already in use");
                 return;
             }
+            if(textBox1.Text.Length == 0 ||  textBox2.Text.Length == 0) {
+                textBox1.Text = string.Empty ;
+                textBox2.Text = string.Empty ;
+                MessageBox.Show("Please enter username or password!");
+                return; 
+            }
             this.utlizatoriTableAdapter.InsertUtilizator(textBox1.Text, textBox2.Text);
             this.tableAdapterManager.UpdateAll(this.mainDataSet);
             this.utlizatoriTableAdapter.Fill(this.mainDataSet.Utlizatori);
@@ -71,6 +77,13 @@ namespace MovieDatabase
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Hide();
         }
     }
 }

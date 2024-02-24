@@ -26,7 +26,12 @@ namespace MovieDatabase
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //this.filmeTableAdapter.GetDataBy(textBox1.Text);
+            var result = this.filmeTableAdapter.GetDataBy1(textBox1.Text);
+            if(result.Rows.Count == 0 )
+            {
+                MessageBox.Show("The movie you're trying to delete does not exist!");
+                return;
+            }
             this.filmeTableAdapter.DeleteFilm(textBox1.Text);
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
@@ -57,7 +62,7 @@ namespace MovieDatabase
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form3 form = new Form3();
+            Form5 form = new Form5();
             form.Show();
             this.Hide();
         }

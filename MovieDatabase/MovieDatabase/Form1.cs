@@ -48,7 +48,7 @@ namespace MovieDatabase
                 return;
             }
             MessageBox.Show("Login successfull");
-            Form3 form = new Form3();
+            Form5 form = new Form5();
             form.Show();
             this.Hide();
         }
