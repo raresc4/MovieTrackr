@@ -38,24 +38,21 @@ namespace MovieDatabase
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
 
         }
-
-        private void filmeDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private bool validare(string s)
         {
-            for(int i= 0; i<s.Length; i++)
+            for(int i=0;i<s.Length; i++)
             {
-                if (Char.IsDigit(s,i) == false)
+                if (Char.IsDigit(s[i]) == false)
                 {
                     return false;
                 }
             }
             return true;
         }
+        private void filmeDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             var result = this.filmeTableAdapter.GetDataBy1(textBox1.Text);
@@ -79,7 +76,13 @@ namespace MovieDatabase
                 MessageBox.Show("Please enter data in all of the fields!");
                 return;
             }
-            if(Convert.ToInt32(textBox5.Text) < 1 || Convert.ToInt32(textBox5.Text) > 10 || validare(textBox5.Text) == false)
+            if(validare(textBox5.Text) == false)
+            {
+                textBox5.Text = string.Empty;
+                MessageBox.Show("Please enter the rating in a correct format!");
+                return;
+            }
+            if (Convert.ToInt32(textBox5.Text) < 1 || Convert.ToInt32(textBox5.Text) > 10)
             {
                 textBox5.Text = string.Empty;
                 MessageBox.Show("Rating unavailable");
@@ -88,6 +91,7 @@ namespace MovieDatabase
             this.filmeTableAdapter.InsertFilm(textBox1.Text, Convert.ToInt32(textBox2.Text), textBox3.Text, textBox4.Text, Convert.ToInt32(textBox5.Text),utilizator.Index);
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
+            MessageBox.Show(textBox1.Text + " added succesfully!");
             textBox1.Text = string.Empty;
             textBox2.Text = string.Empty;
             textBox3.Text = string.Empty;

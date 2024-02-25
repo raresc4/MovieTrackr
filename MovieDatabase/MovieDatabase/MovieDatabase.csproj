@@ -99,6 +99,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MovieDatabaseDataSet.cs">
+      <DependentUpon>MovieDatabaseDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MovieDatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

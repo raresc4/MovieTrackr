@@ -39,6 +39,7 @@ namespace MovieDatabase
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
             textBox1.Text = string.Empty;
+            MessageBox.Show(textBox1.Text + " was deleted succesfully!");
             Form5 form2 = new Form5(utilizator);
             form2.Show();
             this.Hide();

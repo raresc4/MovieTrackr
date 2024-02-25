@@ -74,5 +74,10 @@ namespace MovieDatabase
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
 
         }
+
+        private void filmeDataGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

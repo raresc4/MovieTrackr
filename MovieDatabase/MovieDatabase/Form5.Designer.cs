@@ -118,6 +118,7 @@
             this.filmeDataGridView.RowTemplate.Height = 24;
             this.filmeDataGridView.Size = new System.Drawing.Size(1061, 357);
             this.filmeDataGridView.TabIndex = 7;
+            this.filmeDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.filmeDataGridView_CellContentClick_1);
             // 
             // dataGridViewTextBoxColumn1
             // 
