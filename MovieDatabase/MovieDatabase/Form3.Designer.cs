@@ -272,6 +272,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(51, 22);
             this.textBox5.TabIndex = 14;
+            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // button3
             // 
@@ -305,6 +306,7 @@
             this.Controls.Add(this.button1);
             this.MaximizeBox = false;
             this.Name = "Form3";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MovieTrackr";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.movieDatabaseDataSet)).EndInit();

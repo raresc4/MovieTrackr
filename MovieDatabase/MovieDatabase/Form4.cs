@@ -14,9 +14,11 @@ namespace MovieDatabase
 {
     public partial class Form4 : Form
     {
-        public Form4()
+        Utilizator utilizator;
+        public Form4(Utilizator utilizator)
         {
             InitializeComponent();
+            this.utilizator = utilizator;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,7 +39,7 @@ namespace MovieDatabase
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
             textBox1.Text = string.Empty;
-            Form5 form2 = new Form5();
+            Form5 form2 = new Form5(utilizator);
             form2.Show();
             this.Hide();
         }
@@ -64,7 +66,7 @@ namespace MovieDatabase
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form5 form = new Form5();
+            Form5 form = new Form5(utilizator);
             form.Show();
             this.Hide();
         }

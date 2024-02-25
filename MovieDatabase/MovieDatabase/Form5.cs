@@ -12,9 +12,11 @@ namespace MovieDatabase
 {
     public partial class Form5 : Form
     {
-        public Form5()
+        Utilizator utilizator;
+        public Form5(Utilizator utilizator)
         {
             InitializeComponent();
+            this.utilizator = utilizator;
         }
 
         private void filmeBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -29,6 +31,8 @@ namespace MovieDatabase
         {
             // TODO: This line of code loads data into the 'movieDatabaseDataSet.Filme' table. You can move, or remove it, as needed.
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
+            // TODO: This line of code loads data into the 'movieDatabaseDataSet.Filme' table. You can move, or remove it, as needed.
+            this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
 
         }
 
@@ -39,7 +43,7 @@ namespace MovieDatabase
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form3 form = new Form3();
+            Form3 form = new Form3(utilizator);
             form.Show();
             this.Hide();
         }
@@ -58,9 +62,17 @@ namespace MovieDatabase
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Form4 form2 = new Form4();
+            Form4 form2 = new Form4(utilizator);
             form2.Show(); 
             this.Hide();
+        }
+
+        private void filmeBindingNavigatorSaveItem_Click_1(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.filmeBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
+
         }
     }
 }

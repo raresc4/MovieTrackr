@@ -28,7 +28,7 @@ namespace MovieDatabase {
         
         private UtlizatoriDataTable tableUtlizatori;
         
-        private global::System.Data.DataRelation relationFK_Film_id;
+        private global::System.Data.DataRelation relationFK_Filme_ToUtlizatori;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -220,7 +220,7 @@ namespace MovieDatabase {
                     this.tableUtlizatori.InitVars();
                 }
             }
-            this.relationFK_Film_id = this.Relations["FK_Film id"];
+            this.relationFK_Filme_ToUtlizatori = this.Relations["FK_Filme_ToUtlizatori"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -235,10 +235,10 @@ namespace MovieDatabase {
             base.Tables.Add(this.tableFilme);
             this.tableUtlizatori = new UtlizatoriDataTable();
             base.Tables.Add(this.tableUtlizatori);
-            this.relationFK_Film_id = new global::System.Data.DataRelation("FK_Film id", new global::System.Data.DataColumn[] {
-                        this.tableFilme.FilmidColumn}, new global::System.Data.DataColumn[] {
-                        this.tableUtlizatori.FilmidColumn}, false);
-            this.Relations.Add(this.relationFK_Film_id);
+            this.relationFK_Filme_ToUtlizatori = new global::System.Data.DataRelation("FK_Filme_ToUtlizatori", new global::System.Data.DataColumn[] {
+                        this.tableUtlizatori.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableFilme.UseridColumn}, false);
+            this.Relations.Add(this.relationFK_Filme_ToUtlizatori);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -333,6 +333,8 @@ namespace MovieDatabase {
             
             private global::System.Data.DataColumn columnNota;
             
+            private global::System.Data.DataColumn columnUserid;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public FilmeDataTable() {
@@ -416,6 +418,14 @@ namespace MovieDatabase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn UseridColumn {
+                get {
+                    return this.columnUserid;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -451,7 +461,7 @@ namespace MovieDatabase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public FilmeRow AddFilmeRow(string Nume, int Anul, string Genul, string Actor, int Nota) {
+            public FilmeRow AddFilmeRow(string Nume, int Anul, string Genul, string Actor, int Nota, UtlizatoriRow parentUtlizatoriRowByFK_Filme_ToUtlizatori) {
                 FilmeRow rowFilmeRow = ((FilmeRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -459,7 +469,11 @@ namespace MovieDatabase {
                         Anul,
                         Genul,
                         Actor,
-                        Nota};
+                        Nota,
+                        null};
+                if ((parentUtlizatoriRowByFK_Filme_ToUtlizatori != null)) {
+                    columnValuesArray[6] = parentUtlizatoriRowByFK_Filme_ToUtlizatori[0];
+                }
                 rowFilmeRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowFilmeRow);
                 return rowFilmeRow;
@@ -495,6 +509,7 @@ namespace MovieDatabase {
                 this.columnGenul = base.Columns["Genul"];
                 this.columnActor = base.Columns["Actor"];
                 this.columnNota = base.Columns["Nota"];
+                this.columnUserid = base.Columns["Userid"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -512,6 +527,8 @@ namespace MovieDatabase {
                 base.Columns.Add(this.columnActor);
                 this.columnNota = new global::System.Data.DataColumn("Nota", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNota);
+                this.columnUserid = new global::System.Data.DataColumn("Userid", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUserid);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnFilmid}, true));
                 this.columnFilmid.AutoIncrement = true;
@@ -771,16 +788,13 @@ namespace MovieDatabase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public UtlizatoriRow AddUtlizatoriRow(string Username, string Password, FilmeRow parentFilmeRowByFK_Film_id) {
+            public UtlizatoriRow AddUtlizatoriRow(string Username, string Password, int Filmid) {
                 UtlizatoriRow rowUtlizatoriRow = ((UtlizatoriRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Username,
                         Password,
-                        null};
-                if ((parentFilmeRowByFK_Film_id != null)) {
-                    columnValuesArray[3] = parentFilmeRowByFK_Film_id[0];
-                }
+                        Filmid};
                 rowUtlizatoriRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUtlizatoriRow);
                 return rowUtlizatoriRow;
@@ -1047,13 +1061,41 @@ namespace MovieDatabase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public UtlizatoriRow[] GetUtlizatoriRows() {
-                if ((this.Table.ChildRelations["FK_Film id"] == null)) {
-                    return new UtlizatoriRow[0];
+            public int Userid {
+                get {
+                    try {
+                        return ((int)(this[this.tableFilme.UseridColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Userid\' in table \'Filme\' is DBNull.", e);
+                    }
                 }
-                else {
-                    return ((UtlizatoriRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Film id"])));
+                set {
+                    this[this.tableFilme.UseridColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public UtlizatoriRow UtlizatoriRow {
+                get {
+                    return ((UtlizatoriRow)(this.GetParentRow(this.Table.ParentRelations["FK_Filme_ToUtlizatori"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Filme_ToUtlizatori"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsUseridNull() {
+                return this.IsNull(this.tableFilme.UseridColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetUseridNull() {
+                this[this.tableFilme.UseridColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1122,17 +1164,6 @@ namespace MovieDatabase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public FilmeRow FilmeRow {
-                get {
-                    return ((FilmeRow)(this.GetParentRow(this.Table.ParentRelations["FK_Film id"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Film id"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsFilmidNull() {
                 return this.IsNull(this.tableUtlizatori.FilmidColumn);
             }
@@ -1141,6 +1172,17 @@ namespace MovieDatabase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetFilmidNull() {
                 this[this.tableUtlizatori.FilmidColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public FilmeRow[] GetFilmeRows() {
+                if ((this.Table.ChildRelations["FK_Filme_ToUtlizatori"] == null)) {
+                    return new FilmeRow[0];
+                }
+                else {
+                    return ((FilmeRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Filme_ToUtlizatori"])));
+                }
             }
         }
         
@@ -1343,12 +1385,11 @@ namespace MovieDatabase.MovieDatabaseDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("Genul", "Genul");
             tableMapping.ColumnMappings.Add("Actor", "Actor");
             tableMapping.ColumnMappings.Add("Nota", "Nota");
+            tableMapping.ColumnMappings.Add("Userid", "Userid");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Filme] WHERE (([Filmid] = @Original_Filmid) AND ([Nume] = @Ori" +
-                "ginal_Nume) AND ([Anul] = @Original_Anul) AND ([Genul] = @Original_Genul) AND ([" +
-                "Actor] = @Original_Actor) AND ([Nota] = @Original_Nota))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Filme] WHERE (([Filmid] = @Original_Filmid) AND ([Nume] = @Original_Nume) AND ([Anul] = @Original_Anul) AND ([Genul] = @Original_Genul) AND ([Actor] = @Original_Actor) AND ([Nota] = @Original_Nota) AND ((@IsNull_Userid = 1 AND [Userid] IS NULL) OR ([Userid] = @Original_Userid)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Filmid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Filmid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Nume", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -1356,33 +1397,39 @@ namespace MovieDatabase.MovieDatabaseDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Genul", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Genul", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Actor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Actor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Nota", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nota", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Userid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Userid", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Userid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Userid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Filme] ([Nume], [Anul], [Genul], [Actor], [Nota]) VALUES (@Num" +
-                "e, @Anul, @Genul, @Actor, @Nota);\r\nSELECT Filmid, Nume, Anul, Genul, Actor, Nota" +
-                " FROM Filme WHERE (Filmid = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Filme] ([Nume], [Anul], [Genul], [Actor], [Nota], [Userid]) VA" +
+                "LUES (@Nume, @Anul, @Genul, @Actor, @Nota, @Userid);\r\nSELECT Filmid, Nume, Anul," +
+                " Genul, Actor, Nota, Userid FROM Filme WHERE (Filmid = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nume", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Anul", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Anul", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Genul", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Genul", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Actor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Actor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nota", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nota", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Userid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Userid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Filme] SET [Nume] = @Nume, [Anul] = @Anul, [Genul] = @Genul, [Actor] = @Actor, [Nota] = @Nota WHERE (([Filmid] = @Original_Filmid) AND ([Nume] = @Original_Nume) AND ([Anul] = @Original_Anul) AND ([Genul] = @Original_Genul) AND ([Actor] = @Original_Actor) AND ([Nota] = @Original_Nota));
-SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Filme] SET [Nume] = @Nume, [Anul] = @Anul, [Genul] = @Genul, [Actor] = @Actor, [Nota] = @Nota, [Userid] = @Userid WHERE (([Filmid] = @Original_Filmid) AND ([Nume] = @Original_Nume) AND ([Anul] = @Original_Anul) AND ([Genul] = @Original_Genul) AND ([Actor] = @Original_Actor) AND ([Nota] = @Original_Nota) AND ((@IsNull_Userid = 1 AND [Userid] IS NULL) OR ([Userid] = @Original_Userid)));
+SELECT Filmid, Nume, Anul, Genul, Actor, Nota, Userid FROM Filme WHERE (Filmid = @Filmid)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nume", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Anul", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Anul", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Genul", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Genul", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Actor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Actor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nota", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nota", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Userid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Userid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Filmid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Filmid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Nume", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Anul", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Anul", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Genul", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Genul", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Actor", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Actor", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Nota", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Nota", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Userid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Userid", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Userid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Userid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Filmid", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Filmid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -1399,30 +1446,30 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM dbo.Filme";
+            this._commandCollection[0].CommandText = "SELECT Filmid, Nume, Anul, Genul, Actor, Nota, Userid FROM dbo.Filme";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "DELETE FROM [dbo].[Filme]\r\nWHERE [Nume] = @Nume;";
+            this._commandCollection[1].CommandText = "DELETE FROM [dbo].[Filme] \r\nWHERE [Nume] = @Nume;";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nume", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT Filmid, Nume, Anul, Genul, Actor, Nota\r\nFROM     dbo.Filme\r\nWHERE  Nume = " +
-                "@Nume";
+            this._commandCollection[2].CommandText = "SELECT Nume FROM dbo.Filme WHERE Nume=@Nume";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nume", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "INSERT INTO [dbo].[Filme] ([Nume], [Anul],[Genul],[Actor],[Nota]) VALUES (@Nume, " +
-                "@Anul,@Genul,@Actor,@Nota);\r\nSELECT Nume, Anul, Genul, Actor, Nota FROM Filme WH" +
-                "ERE (Filmid = SCOPE_IDENTITY())\r\n";
+            this._commandCollection[3].CommandText = "INSERT INTO [dbo].[Filme] ([Nume], [Anul],[Genul],[Actor],[Nota],[Userid]) VALUES" +
+                " (@Nume, @Anul,@Genul,@Actor,@Nota,@Userid);\r\nSELECT Nume, Anul, Genul, Actor,No" +
+                "ta,Userid FROM Filme WHERE (Filmid = SCOPE_IDENTITY())\r\n";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nume", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Nume", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Anul", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Anul", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Genul", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Genul", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Actor", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Actor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Nota", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Nota", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Userid", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Userid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1499,7 +1546,7 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Filmid, string Original_Nume, int Original_Anul, string Original_Genul, string Original_Actor, int Original_Nota) {
+        public virtual int Delete(int Original_Filmid, string Original_Nume, int Original_Anul, string Original_Genul, string Original_Actor, int Original_Nota, global::System.Nullable<int> Original_Userid) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Filmid));
             if ((Original_Nume == null)) {
                 throw new global::System.ArgumentNullException("Original_Nume");
@@ -1521,6 +1568,14 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
                 this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_Actor));
             }
             this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_Nota));
+            if ((Original_Userid.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_Userid.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1541,7 +1596,7 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Nume, int Anul, string Genul, string Actor, int Nota) {
+        public virtual int Insert(string Nume, int Anul, string Genul, string Actor, int Nota, global::System.Nullable<int> Userid) {
             if ((Nume == null)) {
                 throw new global::System.ArgumentNullException("Nume");
             }
@@ -1562,6 +1617,12 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Actor));
             }
             this.Adapter.InsertCommand.Parameters[4].Value = ((int)(Nota));
+            if ((Userid.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(Userid.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1582,7 +1643,7 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Nume, int Anul, string Genul, string Actor, int Nota, int Original_Filmid, string Original_Nume, int Original_Anul, string Original_Genul, string Original_Actor, int Original_Nota, int Filmid) {
+        public virtual int Update(string Nume, int Anul, string Genul, string Actor, int Nota, global::System.Nullable<int> Userid, int Original_Filmid, string Original_Nume, int Original_Anul, string Original_Genul, string Original_Actor, int Original_Nota, global::System.Nullable<int> Original_Userid, int Filmid) {
             if ((Nume == null)) {
                 throw new global::System.ArgumentNullException("Nume");
             }
@@ -1603,28 +1664,42 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Actor));
             }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Nota));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_Filmid));
+            if ((Userid.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Userid.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_Filmid));
             if ((Original_Nume == null)) {
                 throw new global::System.ArgumentNullException("Original_Nume");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_Nume));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Nume));
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_Anul));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_Anul));
             if ((Original_Genul == null)) {
                 throw new global::System.ArgumentNullException("Original_Genul");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_Genul));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Genul));
             }
             if ((Original_Actor == null)) {
                 throw new global::System.ArgumentNullException("Original_Actor");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Actor));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Actor));
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_Nota));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Filmid));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_Nota));
+            if ((Original_Userid.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_Userid.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Filmid));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1645,8 +1720,8 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Nume, int Anul, string Genul, string Actor, int Nota, int Original_Filmid, string Original_Nume, int Original_Anul, string Original_Genul, string Original_Actor, int Original_Nota) {
-            return this.Update(Nume, Anul, Genul, Actor, Nota, Original_Filmid, Original_Nume, Original_Anul, Original_Genul, Original_Actor, Original_Nota, Original_Filmid);
+        public virtual int Update(string Nume, int Anul, string Genul, string Actor, int Nota, global::System.Nullable<int> Userid, int Original_Filmid, string Original_Nume, int Original_Anul, string Original_Genul, string Original_Actor, int Original_Nota, global::System.Nullable<int> Original_Userid) {
+            return this.Update(Nume, Anul, Genul, Actor, Nota, Userid, Original_Filmid, Original_Nume, Original_Anul, Original_Genul, Original_Actor, Original_Nota, Original_Userid, Original_Filmid);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1682,7 +1757,7 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
-        public virtual int InsertFilm(string Nume, int Anul, string Genul, string Actor, int Nota) {
+        public virtual int InsertFilm(string Nume, int Anul, string Genul, string Actor, int Nota, global::System.Nullable<int> Userid) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             if ((Nume == null)) {
                 throw new global::System.ArgumentNullException("Nume");
@@ -1704,6 +1779,12 @@ SELECT Filmid, Nume, Anul, Genul, Actor, Nota FROM Filme WHERE (Filmid = @Filmid
                 command.Parameters[3].Value = ((string)(Actor));
             }
             command.Parameters[4].Value = ((int)(Nota));
+            if ((Userid.HasValue == true)) {
+                command.Parameters[5].Value = ((int)(Userid.Value));
+            }
+            else {
+                command.Parameters[5].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2221,21 +2302,21 @@ SELECT Id, Username, Password, Filmid FROM Utlizatori WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(MovieDatabaseDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._filmeTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Filme.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._filmeTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._utlizatoriTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Utlizatori.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._utlizatoriTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._filmeTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Filme.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._filmeTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -2249,19 +2330,19 @@ SELECT Id, Username, Password, Filmid FROM Utlizatori WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(MovieDatabaseDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._filmeTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Filme.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._filmeTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._utlizatoriTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Utlizatori.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._utlizatoriTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._filmeTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Filme.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._filmeTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -2275,19 +2356,19 @@ SELECT Id, Username, Password, Filmid FROM Utlizatori WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(MovieDatabaseDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._utlizatoriTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Utlizatori.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._utlizatoriTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._filmeTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Filme.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._filmeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._utlizatoriTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Utlizatori.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._utlizatoriTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

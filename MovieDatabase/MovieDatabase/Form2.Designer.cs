@@ -59,7 +59,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Cascadia Mono", 18F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
-            this.label1.Location = new System.Drawing.Point(280, 69);
+            this.label1.Location = new System.Drawing.Point(294, 67);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(161, 40);
             this.label1.TabIndex = 1;
@@ -158,6 +158,7 @@
             this.Controls.Add(this.button1);
             this.MaximizeBox = false;
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MovieTrackr";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainDataSet)).EndInit();

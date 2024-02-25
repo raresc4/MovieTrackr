@@ -12,9 +12,11 @@ namespace MovieDatabase
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        Utilizator utilizator;
+        public Form3(Utilizator utilizator)
         {
             InitializeComponent();
+            this.utilizator = utilizator;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,6 +44,18 @@ namespace MovieDatabase
 
         }
 
+        private bool validare(string s)
+        {
+            for(int i= 0; i<s.Length; i++)
+            {
+                if (Char.IsDigit(s,i) == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             var result = this.filmeTableAdapter.GetDataBy1(textBox1.Text);
@@ -65,13 +79,13 @@ namespace MovieDatabase
                 MessageBox.Show("Please enter data in all of the fields!");
                 return;
             }
-            if(Convert.ToInt32(textBox5.Text) < 1 || Convert.ToInt32(textBox5.Text) > 10)
+            if(Convert.ToInt32(textBox5.Text) < 1 || Convert.ToInt32(textBox5.Text) > 10 || validare(textBox5.Text) == false)
             {
                 textBox5.Text = string.Empty;
                 MessageBox.Show("Rating unavailable");
                 return;
             }
-            this.filmeTableAdapter.InsertFilm(textBox1.Text, Convert.ToInt32(textBox2.Text), textBox3.Text, textBox4.Text, Convert.ToInt32(textBox5.Text));
+            this.filmeTableAdapter.InsertFilm(textBox1.Text, Convert.ToInt32(textBox2.Text), textBox3.Text, textBox4.Text, Convert.ToInt32(textBox5.Text),utilizator.Index);
             this.tableAdapterManager.UpdateAll(this.movieDatabaseDataSet);
             this.filmeTableAdapter.Fill(this.movieDatabaseDataSet.Filme);
             textBox1.Text = string.Empty;
@@ -83,9 +97,14 @@ namespace MovieDatabase
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Form5 form = new Form5();
+            Form5 form = new Form5(utilizator);
             form.Show();
             this.Hide();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

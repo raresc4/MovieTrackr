@@ -47,8 +47,9 @@ namespace MovieDatabase
                 MessageBox.Show("User not found");
                 return;
             }
+            Utilizator utilizator = new Utilizator(Convert.ToInt32(result[0][0]), Convert.ToString(result[0][1]));
             MessageBox.Show("Login successfull");
-            Form5 form = new Form5();
+            Form5 form = new Form5(utilizator);
             form.Show();
             this.Hide();
         }
